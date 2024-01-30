@@ -598,6 +598,7 @@ class chains {
   }
 
   double split_potential_scale_reduction(const int index) const {
+    std::cout << "INDEX: " << index << std::endl;
     int n_chains = num_chains();
     std::vector<const double*> draws(n_chains);
     std::vector<size_t> sizes(n_chains);
@@ -608,11 +609,12 @@ class chains {
           = samples_(chain).col(index).bottomRows(n_kept_samples).data();
       sizes[chain] = n_kept_samples;
     }
-
+  
     return analyze::compute_split_potential_scale_reduction(draws, sizes);
   }
 
   double split_potential_scale_reduction(const std::string& name) const {
+    std::cout << "NAME: " << name;
     return split_potential_scale_reduction(index(name));
   }
 };
